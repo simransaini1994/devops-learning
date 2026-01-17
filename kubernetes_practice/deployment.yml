@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-deployment
+  labels:
+    app: my-app
+    type: front-end
+spec:
+  template:
+    metadata:
+      name: nginx-pod1
+      labels:
+        app: nginx
+        env: dev
+        type: front-end
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx
+          ports:
+            - containerPort: 80
+  replicas: 2
+  selector:
+    matchLabels:
+      type: front-end
